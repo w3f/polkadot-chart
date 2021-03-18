@@ -192,11 +192,17 @@ spec:
       name: data
     spec:
       {{- if .Values.persistence.enabled }}
+      {{- if .Values.persistence.storageClass }}
+      storageClassName: "{{ .Values.persistence.storageClass }}"
+      {{- end }}
       accessModes: {{ .Values.persistence.accessModes }}
       resources:
         requests:
           storage: {{ .Values.persistence.dataSize }}
       {{- else }}
+      {{- if .Values.persistence.storageClass }}
+      storageClassName: "{{ .Values.persistence.storageClass }}"
+      {{- end }}
       accessModes:
       - ReadWriteOnce
       resources:
@@ -208,11 +214,17 @@ spec:
       name: chainspec
     spec:
       {{- if .Values.persistence.enabled }}
+      {{- if .Values.persistence.storageClass }}
+      storageClassName: "{{ .Values.persistence.storageClass }}"
+      {{- end }}
       accessModes: {{ .Values.persistence.accessModes }}
       resources:
         requests:
           storage: {{ .Values.persistence.chainspecSize }}
       {{- else }}
+      {{- if .Values.persistence.storageClass }}
+      storageClassName: "{{ .Values.persistence.storageClass }}"
+      {{- end }}
       accessModes:
       - ReadWriteOnce
       resources:
